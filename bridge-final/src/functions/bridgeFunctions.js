@@ -35,8 +35,8 @@ export async function fetchBridgeQuote(tokenAddress, amount, originChainId, dest
 }
 
 // step 2: Initiating a Deposit (User Intent)
-export async function initiateBridgeDeposit(signer, tokenAddress, amount, destinationChainId) {
-  const quoteData = await fetchBridgeQuote(tokenAddress, amount, 1, destinationChainId) 
+export async function initiateBridgeDeposit(signer, tokenAddress, amount) {
+  const quoteData = await fetchBridgeQuote(tokenAddress, amount, originChainId, destinationChainId) 
   const spokePool = new ethers.Contract(spokePoolAddress, spokePoolABI, signer);
 
   const ZERO_ADDRESS = "0x0000000000000000000000000000000000000000";

@@ -9,7 +9,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { ArrowRight, Loader2, Wallet } from "lucide-react"
 import React from 'react'
 import { ethers } from 'ethers'
-import { initiateBridgeDeposit, checkAllowance, approveToken } from '@/functions/bridgeFunctions';
+import { checkAllowance } from '@/functions/bridgeFunctions';
 
 const tokens = [
   { symbol: 'USDC', name: 'USD Coin' },
@@ -29,36 +29,7 @@ function BridgeComponent() {
   const tokenAddress = "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48" // USDC on Ethereum
 
   const handleBridge = async (e) => {
-    e.preventDefault()
-    if (!amount || !selectedToken) return
-
-    const provider = new ethers.providers.Web3Provider(window.ethereum)
-    const signer = await provider.getSigner()
-    const amountInWei = ethers.utils.parseUnits(amount, 6) // Assuming USDC has 6 decimals
-  
-    if (!hasAllowance) {
-      setApproving(true)
-      try {
-        const approvalTx = await approveToken(signer, tokenAddress, amountInWei)
-        console.log("Approval transaction hash:", approvalTx)
-        setHasAllowance(true)
-      } catch (error) {
-        console.error("Approval failed:", error)
-      } finally {
-        setApproving(false)
-      }
-    } else {
-      setBridging(true)
-      try {
-        const txHash = await initiateBridgeDeposit(signer, tokenAddress, amountInWei)
-        console.log("Bridge transaction hash:", txHash)
-        setBridgeComplete(true)
-      } catch (error) {
-        console.error("Bridge failed:", error)
-      } finally {
-        setBridging(false)
-      }
-    }
+    // ADD CODE
   }
 
   const handleConnectWallet = async () => {
